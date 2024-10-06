@@ -19,10 +19,27 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 
 function die(msg) {
-    // alert(msg);
-    // undefinedFunction();
-    throw new Error("PSFree failed: " + msg + "\nReload the page and try again.");
+ //   alert("⚠️​ PSFree failed: " + msg + "\n🔄​ Click accept and the page will reload");
+
+    // Simula la pulsación de la tecla "Escape"
+    const event = new KeyboardEvent('keydown', { keyCode: 27, which: 27 });
+    document.dispatchEvent(event);
+
+    // Lanza la excepción
+    throw new Error("⚠️​ PSFree fail! " + msg + "\n​★ Click accept to 🔄");
 }
+
+// Función para manejar el evento de pulsación de tecla
+function manejarKeyPress(event) {
+    // Verifica si la tecla presionada es la tecla "Escape" (código 27)
+    if (event.keyCode === 27) {
+        // Recarga la página
+        location.reload();
+    }
+}
+
+// Registra un escuchador de eventos para keydown
+document.addEventListener("keydown", manejarKeyPress);
 
 function debug_log(msg) {
     // let textNode = document.createTextNode(msg);
